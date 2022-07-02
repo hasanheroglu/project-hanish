@@ -10,6 +10,6 @@ CREATE STREAM total_events AS
          , t.city
          , t.num_events
     FROM events AS e
-    INNER JOIN topk t
+    INNER JOIN num_events_per_city t
     ON t.city = e.venue->city
     EMIT CHANGES;
