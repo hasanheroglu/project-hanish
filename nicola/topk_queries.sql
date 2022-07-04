@@ -1,8 +1,9 @@
 CREATE TABLE num_events_per_city AS
-    SELECT venue->city AS city
+    -- Remove leading and trailing postal code
+    SELECT REGEXP_REPLACE(REGEXP_REPLACE(venue->city, '^[0-9]* ', ''), ' [0-9]([0-9]|\\w)*$', '') AS city
          , COUNT(id) AS num_events
     FROM events
-    GROUP BY venue->city
+    GROUP BY REGEXP_REPLACE(REGEXP_REPLACE(venue->city, '^[0-9]* ', ''), ' [0-9]([0-9]|\\w)*$', '')
     EMIT CHANGES;
 
 CREATE STREAM total_events AS
