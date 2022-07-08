@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from nicola.get_top_cities import query, statement
+import nicola.ksql as ksql
 
 if __name__ == '__main__':
     parser = ArgumentParser()
@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     for file in args.files:
         with open(file) as f:
-            success, msg = statement(f.read(), args.server)
+            success, msg = ksql.statement(f.read(), args.server)
             if not success:
                 print(f'❌{file}', end='')
                 if args.verbose:
