@@ -1,1 +1,5 @@
 kafka-python3
+numpy
+pandas
+scipy
+bokeh
