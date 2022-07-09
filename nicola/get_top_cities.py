@@ -2,7 +2,7 @@
 
 import argparse
 import json
-from .ksql import query
+from ksql import query
 
 europe = [
     'AX', 'AL', 'AD', 'AM', 'AT', 'BY', 'BE', 'BA', 'BG', 'HR', 'CZ', 'DK',
