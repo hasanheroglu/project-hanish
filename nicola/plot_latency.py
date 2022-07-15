@@ -19,11 +19,13 @@ def main():
 
     # This approach is from https://stackoverflow.com/questions/63511090/how-can-i-smooth-data-in-python
     df = pd.DataFrame({ 'y': y })
-    y_filtered = df[['y']].apply(savgol_filter, window_length=50, polyorder=3)['y']
+    y_filtered = df[['y']].apply(savgol_filter, window_length=40, polyorder=3)['y']
+    y_filtered_hard = df[['y']].apply(savgol_filter, window_length=400, polyorder=3)['y']
 
     plot = figure(title='Message latency', x_axis_label='event', y_axis_label='latency (ms)')
-    plot.line(x, y,          line_width=2, legend_label='raw', color='blue')
-    plot.line(x, y_filtered, line_width=2, legend_label='smoothed', color='orange')
+    plot.line(x, y,               line_width=2,   legend_label='raw',      color='blue')
+    plot.line(x, y_filtered,      line_width=2,   legend_label='smoothed', color='orange')
+    plot.line(x, y_filtered_hard, line_width=1.5, legend_label='trend',    color='red')
 
     if args.output:
         save(plot, args.output, title='Latency measurements')
