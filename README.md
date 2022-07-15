@@ -28,3 +28,13 @@ JSON object `{ "city-name": num-events, ... }` to stdout. For example:
     $ python nicola/get_top_cities.py 15
 
 The required stream and table structures are created with `nicola/queries.sql`.
+
+## Latency Measurements
+
+To measure latencies:
+
+    $ python nicola/latency.py --topic TOPIC_NAME [-n MAX_EVENTS] > OUT_FILE
+    $ python nicola/plot_latency.py OUT_FILE
+
+The first script will consume events from `TOPIC_NAME` and store measured latencies in `OUT_FILE` until interrupted or
+the optional argument `MAX_EVENTS` is reached.
