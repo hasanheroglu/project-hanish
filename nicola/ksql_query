@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+    echo "Usage: ksql_query QUERY [SERVER]"
+    exit 1
+fi
+
+server_name="localhost:8088"
+if [[ -n $2 ]]; then
+    server_name="$2"
+fi
+
+curl -X "POST" "http://$server_name/query-stream" \
+    -d "{
+    \"sql\": \"$1\",
+    \"streamsProperties\": {}
+}"
